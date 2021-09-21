@@ -1,14 +1,21 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
+import index from './index.css';
+function App(){
 
-function AppF(){
+const[itemm,updateInput]=useState("");
+const[list,updateList]=useState([]);
 
-const[newItem,updateItem]=useState("");
-const[list,updateInput]=useState([]);
+
 
 const addItem =()=>{
-    list.push({description:newItem})
-    updateInput(list);
+
+  
+    list.push({description:itemm})
+    updateList(list);
+    updateInput("");
+
 }
+
 
 return(
 
@@ -18,14 +25,28 @@ return(
   <input
      type="text"
      placeholder="Type there"
-     value={newItem}
+     value={itemm}
      onChange={(event)=>updateInput(event.target.value)}
   />
    <button
-    onClick={()=>this.addItem()}
+    onClick={()=>addItem()}
     > +
     </button>
+    <ul>
+     {list.map( item=>{
+         return(
+          <li key={item.id}>
+            {item.value}
+            
+             </li>
+   )
+     })}
+     </ul>
+    <div>
+    
+    </div>
    <br/>
   </div>
   </div>
 )}
+export default App;
