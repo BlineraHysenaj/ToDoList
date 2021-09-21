@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+
+import index from './index.css'
 class App extends Component{
 constructor(props){
   super(props);
@@ -10,31 +11,39 @@ constructor(props){
   }
 }
 updateInput(key, value){
+
+// e bon update state=in
   this.setState({
     [key]:value
   })
 
 }
 addItem(){
-  const newItem={
-    id:1+ Math.random(),
-    value: this.state.newItem.slice()
-  }
-  
-  const list= [...this.state.list];
+  //me kriju item me id unike
+    const newItem={
+       id:1+ Math.random(),
+       value: this.state.newItem.slice()
+    }
+  //me bo copy listen momentale te items
+    const list= [...this.state.list];
 
-  list.push(newItem);
+  //me kriju nje item te re ne liste
+    list.push(newItem); 
 
-  this.setState({
-    list,
-    newItem:""
+ //me updatu state-in me listene re dhe me ja vendos inputat e newItem-it
+    this.setState({
+      list,
+      newItem:""
   });
 }
 
 deleteItem(id){
-
+  //me bo copy listen momentale te items
   const list=[...this.state.list];
+
+  // me i filtru njesite qe kane me u fshi
   const updatedList=list.filter(item=> item.id!==id);
+
   this.setState({list:updatedList})
 }
 
@@ -42,7 +51,7 @@ deleteItem(id){
 render(){
   return (
     <div className="App">
-      <div>To do list
+      <div className="text-input">To do list
    <br/>
     <input
        type="text"
@@ -52,20 +61,19 @@ render(){
     />
     <button
     onClick={()=>this.addItem()}
-    > Add 
+    > +
     </button>
    <br/>
    <ul>
      {this.state.list.map( item=>{
          return(
-           <li key={item.id}>
-             {item.value}
+          <li key={item.id}>
+            {item.value}
              <button
-             onClick={()=>this.deleteItem(item.id)}
+                 onClick={()=>this.deleteItem(item.id)}
              >
                X
              </button>
-
              </li>
    )
      })}
